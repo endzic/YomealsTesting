@@ -14,12 +14,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import pages.LocationPopupPage;
+import pages.LoginPage;
+import pages.NotificationSistemPage;
+
+
 public abstract class BasicTest {
 	
 	protected WebDriver driver;
 	protected String baseUrl =  "http://demo.yo-meals.com/";
 	protected String userEmail = "customer@dummyid.com";
 	protected String userPassword = "12345678a";
+	protected LocationPopupPage locationPopupPage;
+	protected LoginPage loginPage;
+	protected NotificationSistemPage notificationSystemPage;
 	
 	private File screenshot;
 	private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -35,6 +43,9 @@ public abstract class BasicTest {
 		this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		this.driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 		
+		this.locationPopupPage = new LocationPopupPage(driver);
+		this.loginPage = new LoginPage(driver);
+		this.notificationSystemPage = new NotificationSistemPage(driver);
 	}
 	
 	@AfterMethod
